@@ -3,9 +3,9 @@ import argparse
 import os
 import pandas as pd
 import re
-from fb-json2table.func_lib import get_args, parse_fb_json, \
+from fbjson2table.func_lib import get_args, parse_fb_json, \
     save_to_folder
-from fb-json2table.table_class import TempDFs, PostsDFs, \
+from fbjson2table.table_class import TempDFs, PostsDFs, \
     FriendsDFs, MessagesDFs, ReactionsDFs, \
     CommentsDFs, PhotosDFs, VideosDFs
 
