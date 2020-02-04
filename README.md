@@ -40,6 +40,7 @@ Thus, if you also want to analyze your own facebook data or you have some json t
 this repo can help you to turn the difficult to analyze json to easier to analyze table.
 
 Note: the mean of structure is like facebook:
+
 ```
 [
   {
@@ -84,18 +85,22 @@ Finally, the most bothering and making automation almost impossible is that, the
 Facebook will not notice you!
 
 For example, the data I download long time ago, I can find posts in "posts/your_posts.json/", and the content is like:
+
 ```
 {
   "status_updates": [
     {
       "timestamp": 1415339550,
       ...
-```.
+```
+
 The data I download recently, if I want to find posts, I should go to "posts/your_posts_1.json/", the filename have changed, and the content is like:
+
 ```
 [
   {
     "timestamp": 1575375973,
-```.
+```
+
 We can find that in new structure, we do not have to and shoud not to specify "status_updates", and if we load new json into our old code, it will raise many
 "KeyError". Furthermore, there may be other changing in the json content.
