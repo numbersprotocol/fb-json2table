@@ -178,7 +178,7 @@ We can find that in new structure, we do not have to and shoud not to specify "s
     
 ## explanation of terms
 
-   ####depth(peeling)
+   #### depth(peeling)
    
    In the json, every dict will add one depth(peeling). We count depth from 0.
    
@@ -191,13 +191,38 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    Because in normal method, if we want to get "b" or "bb", we should write "dummy_dict["a"]" or "dummy_dict["c"]["aa"].
    We have to specify 1 or 2 keys, so the depth is 0 or 1.
    
-   ####top_df, sub_df
+   #### top_df, sub_df
    
-   Sub_df are those dfs with table name 
+   Sub_df are those dfs with table name containing the table name of the specifics. For example, "temp__attachments__data", "temp__attachments__data__media" and so on, are sub_dfs of "temp__attachments".
    
-   From the table name of dfs, we can know the keys we should specify in the original json.
+   The sub_df can be viewd as one column but recording mutilple value of one df.
    
-   Take previous sample as example, we can find that if we want to get "uri" in "temp__attachments__data__media", we should 
-   write `json_content[2]["attachments"][0]["data"][0]["media"]["uri"]`
+   Take "dummy_dict" as example, this repo will turn it into,
    
-    
+   ```
+   temp
+   id_0| a |
+   ----+---+
+     0 | b |      
+   ----+---+
+
+   temp_c(table name)
+   id_0|id_c_1| aa | cc |
+   ----+------+----+----+
+     0 |  0   | bb | d  |
+   ----+------+----+----+
+   ```
+   
+   but it can be viewed as
+   
+   ```
+   temp
+   id_0| a | c                      |
+   ----+---+------------------------+
+     0 | b |{"aa": "bb", "cc": "d"} |    
+   ----+---+------------------------+
+   ```
+
+   The "temp_c" is like something growing from "temp", so I call it sub_df.
+   
+   Top_df refers to the base df when we want to merge sub_df.
