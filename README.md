@@ -100,7 +100,60 @@ The data I download recently, if I want to find posts, I should go to "posts/you
 [
   {
     "timestamp": 1575375973,
+    ...
 ```
 
 We can find that in new structure, we do not have to and shoud not to specify "status_updates", and if we load new json into our old code, it will raise many
 "KeyError". Furthermore, there may be other changing in the json content.
+
+## the goal of this repo
+
+1. turn the Facebook json to table
+
+2. decrease the things should be speficfied
+
+3. make the code robust to changing of json structure, or make it easier to fix when json structure changes
+
+# How to use
+
+1. load json
+
+    you can load json by your own method, or use the function we write for Facebook json to handling mojibake.
+    
+    ```
+    from fbjson2table.func_lib import parse_fb_json
+    
+    json_content = parse_fb_json($PATH_OF_JSON)
+    ```
+    
+2. feed it into "TempDFs", and take a look of "TempDFs.df_list" and "TempDFs.table_name_list",
+
+    ```
+    from tabulate import tabulate
+    from fbjson2table.table_class import TempDFs
+    
+    temp_dfs = TempDFs(json_content)
+    for df, table_name in zip(temp_dfs.df_list, temp_dfs.table_name_list):
+        print(table_name, ':')
+        print(tabulate(df, headers='keys', tablefmt='psql'), '\n')
+    ```
+    
+    here is example of json_content: https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_json_content.json
+    
+    here is example of TempDFs.df_list and TempDFs.table_name_list: https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt
+    
+    explanation: Every df has its own name, the first df is default named with "temp", for the follownig dfs will concat "__DICT_KEY " 
+    as suffix.
+    
+    Every df has id of its own "depth(peeling)", and all ids of connected upper layer. The id of first depth is always named "id_0", and the
+    following id is named with "id_DICT_KEY_DEPTH", example: "id_attachment_1".
+    
+    With the ids, we can do the "join" operation. For example, if we want to put "uri" of "media" and "timestamp" of posts in same table,
+    the code will like:
+    
+    ```
+    top_df = temp_posts_dfs[0].set_index("id_0", drop=False)
+    append_df = temp_posts_df[4].set_index("id_0", drop=False)
+    
+    wanted_df = top_df.join(append_df) # What we want
+    ```
