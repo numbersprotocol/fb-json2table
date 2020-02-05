@@ -50,7 +50,7 @@ Note: the mean of structure is like facebook:
    },
    {
     feature_1: feature_1_of_record_2,
-    feature_2: feature_2_of_record_1,
+    feature_2: feature_2_of_record_2,
     ...
    },
    ...
@@ -226,3 +226,91 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    The "temp_c" is like something growing from "temp", so I call it sub_df.
    
    Top_df refers to the base df when we want to merge sub_df.
+   
+# Automation
+
+   ## TL;DR
+   
+   For most case of Facebook json
+   
+   1.
+   
+   ```
+   from fbjson2table.func_lib import parse_fb_json
+   from fbjson2table.table_class import TempDFs
+
+
+   json_content = parse_fb_json($PATH_OF_JSON)
+   temp_dfs = TempDFs(json_content)
+   one_to_one_df, _ = temp_dfs.temp_to_wanted_df(
+                 wanted_columns=wanted_columns
+                 ) 
+   ```
+
+   Take a look of one_to_one_df, and determine which columns we want.
+   
+   2.
+   
+   ```
+   wanted_columns = LIST_OF_WANTED_COLUMNS
+
+   df, top_id = temp_dfs.temp_to_wanted_df(
+            wanted_columns=wanted_columns
+        )
+   ```
+   
+   Then "df" is what we want.
+   
+   ## Take a look of `temp_to_wanted_df`
+   
+   For the reason that Facebook may change json structure, we developed a series of methods to handle this problem.
+   
+   The core concept is that, "putting all things in one table, then from the table take what we want."
+   
+   Take a look of: https://github.com/numbersprotocol/fb-json2table/blob/3f5f4b8741727c8dd2aa3f4f95030e3f23d53554/fbjson2table/table_class.py#L529
+   
+   The first thing we do is "get_routed_dfs."
+   
+   => Because that "df" in "df_list" may diverge, we have to get the dfs have the same "route" of "top_df".
+   
+   Second, we do "get_start_peeling."
+   
+   => We have to find the index of top_df in df_list for next step.
+   
+   Then, we do "merge_one_to_one_sub_df"
+   
+   => Merge all one-to-one sub_dfs.
+   
+   Finally, we do "get_wanted_columns"
+   
+   => Extract the columns what we want, and return NaN when the column do not exist.
+   
+   There are four values we should specify in `temp_to_wanted_df`, `wanted_columns`,`route_by_table_name`, `start_by`, and `regex`.
+   
+   So, how to input these value?
+   
+   The `wanted_columns` is a list of names of columns we want, or we can input `[]`, it will return all columns.
+   
+   The `route_by_table_name` is the last table name suffix of top. 
+   
+   It is be used when we want to choose one df as top_df, and that df is in a diverging branch of df_list.
+   
+   Take https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt for example,
+   
+   If we plot the relationship of df_list:
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
