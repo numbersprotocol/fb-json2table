@@ -299,7 +299,7 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    
    If we plot the relationship of df_list:
    
-   
+   ![Image of relation of df_list](https://github.com/numbersprotocol/fb-json2table/blob/master/images/example_df_list_relationship.png)
    
    
    
