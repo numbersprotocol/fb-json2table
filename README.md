@@ -8,11 +8,11 @@
 # Setup
    1. clone this repo
 
-   `git clone https://github.com/numbersprotocol/fb-json2table.git`
+      `git clone https://github.com/numbersprotocol/fb-json2table.git`
 
    2. export path
 
-   `export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
+      `export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
 
    or you want to use `virtualenv` to keep environment clean
    
@@ -83,9 +83,7 @@ or you can refer to how this repo turn dict and list combination to table: [link
 
 ## why Facebook json is not friendly to analyze?
 
-here is an example of Facebook json:
-
-[example_facebook_json](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_facebook_json.json)
+here is an example of Facebook json: [example_facebook_json](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_facebook_json.json)
 
 We can find that if we want to analyze the relationship between reaction type ("LIKE" or "WOW") and time by using python,
 
@@ -106,9 +104,9 @@ Take a look of [example_json_content](https://github.com/numbersprotocol/fb-json
 find that if one post does not have photo, that post will not have features of photo. If the json is too long for naked eyes, we may ignore some interesting 
 data recorded by Facebook!
 
-Finally, the most bothering and making automation almost impossible is that, the structure of Facebook json may change, and have changed! And the worst is that.
+Finally, the most bothering and making automation almost impossible is that, the structure of Facebook json may change, and have changed! And the worst is that,
 
-### Facebook will not notify you!!!!
+#### !!!!Facebook will not notify you!!!!
 
 For example, the data I download long time ago, I can find posts in "posts/your_posts.json/", and the content is like:
 
