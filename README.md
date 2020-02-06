@@ -1,18 +1,40 @@
 # fb-json2table
-Parse Facebook archive JSON files to tables.
+   Parse Facebook archive JSON files to tables.
 
 # requirement
 
-pandas >= 0.24.1
+   pandas >= 0.24.1
 
 # Setup
-clone this repo
+   1. clone this repo
 
-`git clone https://github.com/numbersprotocol/fb-json2table.git`
+   `git clone https://github.com/numbersprotocol/fb-json2table.git`
 
-export path
+   2. export path
 
-`export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
+   `export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
+
+   or you want to use `virtualenv` to keep environment clean
+   
+   1. `git clone https://github.com/numbersprotocol/fb-json2table.git`
+   
+   2. `pip3 install virtualenv`
+   
+   3. `virtualenv -p python3 env`
+   
+   4. `source env/bin/activate`
+   
+   5. `(env) pip3 install pandas==0.24.1`
+   
+   6. `(env) python3 setup.py bdist_wheel`
+   
+   7. `(env) pip3 install dist/fbjson2table-1.0.0-py3-none-any.whl`
+   
+   (if you want to run example/examply.py)
+   
+   8. `(env) pip3 install tabulate`
+   
+   
 
 # TL;DR
 
@@ -31,15 +53,15 @@ for df in temp_dfs.df_list:
 and you will find that all the content in json turned to table-like(DataFrame)
 
 # Introduction
-This repo is based on the requierments of Numbers(https://github.com/numbersprotocol).
+This repo is based on the requierments of [Numbers](https://github.com/numbersprotocol).
 
-The final goal of this repo is to automate the parsing process of json in downloaded facebook data.
+The final goal of this repo is to automate the parsing process of json in downloaded Facebook data.
 
 Thus, if you also want to analyze your own facebook data or you have some json that structure is like facebook data,
 
 this repo can help you to turn the difficult to analyze json to easier to analyze table.
 
-Note: the mean of structure is like facebook:
+Note: what I mean of structure is like Facebook json:
 
 ```
 [
@@ -57,13 +79,13 @@ Note: the mean of structure is like facebook:
 ]
 ```
 
-or you can refer to how this repo turn dict and list combination to table:
+or you can refer to how this repo turn dict and list combination to table: [link](https://github.com/numbersprotocol/fb-json2table/blob/master/dict_list_combination_to_table.txt)
 
 ## why Facebook json is not friendly to analyze?
 
 here is an example of Facebook json:
 
-https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_facebook_json.json
+[example_facebook_json](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_facebook_json.json)
 
 We can find that if we want to analyze the relationship between reaction type ("LIKE" or "WOW") and time by using python,
 
@@ -75,14 +97,18 @@ reaction_type = [x["data"][0]["reactions"]["reactions"] for x in example_json["r
 ```
 
 We have to specify many keys in our code.
-Furthermore, make things more difficult is that, if one record does not have one feature, in facebook json, it will not display instead of displaying "null"
-, and we do not really know how many features Facebook records. Or at least, I do not find a formal document writed kinds of data recorded by Facebook.
-Take a look of https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_json_content.json, this is example of your_post.json, we can
+Furthermore, make things more difficult is that, if one record does not have one feature, in Facebook json, it will not display instead of displaying "null"
+, and we do not really know how many features Facebook records. 
+
+Or at least, I do not find a formal document writed kinds of data recorded by Facebook.
+
+Take a look of [example_json_content](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_json_content.json), this is example of `your_post.json`, we can
 find that if one post does not have photo, that post will not have features of photo. If the json is too long for naked eyes, we may ignore some interesting 
 data recorded by Facebook!
 
 Finally, the most bothering and making automation almost impossible is that, the structure of Facebook json may change, and have changed! And the worst is that.
-Facebook will not notice you!
+
+### Facebook will not notify you!!!!
 
 For example, the data I download long time ago, I can find posts in "posts/your_posts.json/", and the content is like:
 
@@ -138,9 +164,9 @@ We can find that in new structure, we do not have to and shoud not to specify "s
         print(tabulate(df, headers='keys', tablefmt='psql'), '\n')
     ```
     
-    here is example of json_content: https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_json_content.json
+    here is example of [json_content](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_json_content.json)
     
-    here is example of TempDFs.df_list and TempDFs.table_name_list: https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt
+    here is example of [TempDFs.df_list and TempDFs.table_name_list](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt)
     
     #### explanation: 
     
@@ -184,11 +210,11 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    
    For example, 
    
-   `dummy_dict = {"a": "b", "c":{"aa": "bb", "cc": "d"}}` ,
+   `dummy_dict = {"a": "b", "c":{"aa": "bb", "cc": "d"}}`,
    
    "a" is at depth 0, "aa" is at depth 1.
    
-   Because in normal method, if we want to get "b" or "bb", we should write "dummy_dict["a"]" or "dummy_dict["c"]["aa"].
+   Because in normal method, if we want to get "b" or "bb", we should write `dummy_dict["a"]` or `dummy_dict["c"]["aa"]`.
    We have to specify 1 or 2 keys, so the depth is 0 or 1.
    
    #### top_df, sub_df
@@ -243,11 +269,15 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    json_content = parse_fb_json($PATH_OF_JSON)
    temp_dfs = TempDFs(json_content)
    one_to_one_df, _ = temp_dfs.temp_to_wanted_df(
-                 wanted_columns=wanted_columns
+                 wanted_columns=[]
                  ) 
    ```
 
    Take a look of one_to_one_df, and determine which columns we want.
+   
+   ```
+   print(one_to_one_df.columns)
+   ```
    
    2.
    
@@ -267,50 +297,92 @@ We can find that in new structure, we do not have to and shoud not to specify "s
    
    The core concept is that, "putting all things in one table, then from the table take what we want."
    
-   Take a look of: https://github.com/numbersprotocol/fb-json2table/blob/3f5f4b8741727c8dd2aa3f4f95030e3f23d53554/fbjson2table/table_class.py#L529
+   Take a look of: [link](https://github.com/numbersprotocol/fb-json2table/blob/3f5f4b8741727c8dd2aa3f4f95030e3f23d53554/fbjson2table/table_class.py#L529)
    
-   The first thing we do is "get_routed_dfs."
+   The first thing we do is `get_routed_dfs`.
    
    => Because that "df" in "df_list" may diverge, we have to get the dfs have the same "route" of "top_df".
    
-   Second, we do "get_start_peeling."
+   Second, we do `get_start_peeling`.
    
    => We have to find the index of top_df in df_list for next step.
    
-   Then, we do "merge_one_to_one_sub_df"
+   Then, we do `merge_one_to_one_sub_df`.
    
    => Merge all one-to-one sub_dfs.
    
-   Finally, we do "get_wanted_columns"
+   Finally, we do `get_wanted_columns`.
    
    => Extract the columns what we want, and return NaN when the column do not exist.
    
-   There are four values we should specify in `temp_to_wanted_df`, `wanted_columns`,`route_by_table_name`, `start_by`, and `regex`.
+   In `temp_to_wanted_df`, there are four parameters we should specify, `temp_to_wanted_df`, `wanted_columns`,`route_by_table_name`, `start_by`, and `regex`.
    
    So, how to input these value?
    
    The `wanted_columns` is a list of names of columns we want, or we can input `[]`, it will return all columns.
    
-   The `route_by_table_name` is the last table name suffix of top. 
+   The `route_by_table_name` is the last table name suffix of top_df. 
    
    It is be used when we want to choose one df as top_df, and that df is in a diverging branch of df_list.
    
-   Take https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt for example,
+   Take [example_df_list](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt) for example,
    
    If we plot the relationship of df_list:
    
    ![Image of relation of df_list](https://github.com/numbersprotocol/fb-json2table/blob/master/images/example_df_list_relationship.png)
    
+   We can find there are two route in the picture. When we want to merge `temp__attachments__data__media` and its sub_dfs, we have to 
+   extract them in df_list. Or `temp__data` may be a problem when we do the `join` operation.
    
+   When we set `route_by_table_name` eqauls `"media"`, we will get the route like:
    
+   ![Image of route media](https://github.com/numbersprotocol/fb-json2table/blob/master/images/route_of_temp__attachments__data__media.png)
    
+   The `start_by` is the unique column name of top_df in routed_df_list.
    
+   When we do `join` operation, we have to choose one df in df_list as our top_df. Take the [example_df_list](https://github.com/numbersprotocol/fb-json2table/blob/master/example/example_df_list.txt), if we want to set "temp__attachments__data__media" as top_df, we have to find the unique column name of it. For example, "uri". By the way, the "title" will not work because "title" also appear in "temp."
    
+   The `regex` is whether to use "regex" when find `start_by`.
    
+   Thus, if we want get the "creation_timestamp", "description", "title", "uri", and "upload_ip" of photos of posts in one table, the whole process will be like:
    
+   ```
+   from fbjson2table.func_lib import parse_fb_json
+   from fbjson2table.table_class import TempDFs
+
+
+   json_content = parse_fb_json($PATH_OF_JSON)
+   temp_dfs = TempDFs(json_content)
+   one_to_one_df, _ = temp_dfs.temp_to_wanted_df(
+                      route_by_table_name='media',
+                      strat_by='uri'
+                      )
+   print(one_to_one_df.columns)
+   ```
    
+   get
    
+   ```
+   Index(['creation_timestamp', 'description', 'id_0', 'id_attachments_1',
+       'id_data_2', 'id_media_3', 'title', 'uri', 'media_metadata_id_0',
+       'media_metadata_id_attachments_1', 'media_metadata_id_data_2',
+       'media_metadata_id_media_metadata_4', 'photo_metadata_id_0',
+       'photo_metadata_id_attachments_1', 'photo_metadata_id_data_2',
+       'photo_metadata_id_media_metadata_4',
+       'photo_metadata_id_photo_metadata_5', 'photo_metadata_upload_ip'],
+      dtype='object')
+   ```
    
+   Then,
    
+   ```
+   wanted_columns = ['creation_timestamp', 'description', 'title', 'uri',
+                     'photo_metadata_upload_ip']
+   photo_df, _ = temp_dfs.temp_to_wanted_df(
+                          wanted_columns=wanted_columns,
+                          route_by_table_name='media',
+                          strat_by='uri'
+                      )
+   ```
    
-   
+   The `photo_df` is what we want.
