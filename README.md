@@ -48,35 +48,48 @@ The tree structure of the folder should look like
 
 ## Setup environment
 
-   1. Clone this repository
+### Install from PyPI
 
-      `git clone https://github.com/numbersprotocol/fb-json2table.git`
+User-level installation
 
-   2. Export PYTHPNPATH
+```
+$ pip3 install --user fbjson2table
+```
 
-      `export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
+System-level installation
 
-   or you may use `virtualenv` to keep the dev environment clean
+```
+$ sudo pip3 install fbjson2table
+```
+
+### Install from Source
+
+1. Clone this repository
+
+    ```
+    $ git clone https://github.com/numbersprotocol/fb-json2table.git
+    ```
+
+1. Export PYTHPNPATH
+
+    ```
+    $ export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH
+    ```
+
+    or you may use `virtualenv` to keep the dev environment clean
    
-   1. `git clone https://github.com/numbersprotocol/fb-json2table.git`
-   
-   2. `pip3 install virtualenv`
-   
-   3. `virtualenv -p python3 env`
-   
-   4. `source env/bin/activate`
-   
-   5. `(env) pip3 install pandas==0.24.1`
-   
-   6. `(env) python3 setup.py bdist_wheel`
-   
-   7. `(env) pip3 install dist/fbjson2table-1.0.0-py3-none-any.whl`
-   
-   (if you want to run example/examply.py)
-   
-   8. `(env) pip3 install tabulate`
-   
-   
+    ```
+    $ git clone https://github.com/numbersprotocol/fb-json2table.git
+    $ pip3 install virtualenv
+    $ virtualenv -p python3 env
+    $ source env/bin/activate
+    $ (env) pip3 install pandas==0.24.1
+    $ (env) python3 setup.py bdist_wheel
+    $ (env) pip3 install dist/fbjson2table-1.0.0-py3-none-any.whl
+    $ # if you want to run example/examply.py
+    $ (env) pip3 install tabulate
+    ```
+
 ## TL;DR (The Hello World example)
 
 ```
