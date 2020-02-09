@@ -19,7 +19,10 @@
    In order to analyze your Facebook data, you first need to get a copy of your data from Facebook. Please follow the [instruction](https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) provided by Facebook and download. [This post](https://www.wired.com/story/download-facebook-data-how-to-read/) also provide good instructions of how to download your own Facebook data and how it will look like.
 
 
-   The downloaded data is a big zip archive with the size from a hundred MB to a fea GB. Be patient and unzip the archive. The `path of the root folder` which contains all JSON files is the `PATH_OF_JSON` you need to execute the example below. The tree structure of the folder should look like
+   The downloaded data is a big zip archive with the size from a hundred MB to a few GB. Be patient and unzip the archive. The **path of the root folder** which contains all JSON files will be the `PATH_OF_JSON` you need to execute the example below. 
+
+
+The tree structure of the folder should look like
 
 
 ```
@@ -88,20 +91,21 @@ for df in temp_dfs.df_list:
     print(df)
 ```
 
-the example above turns JSON files in your `PATH_OF_JSON`
-and you will find that all the content in json turned to table-like(DataFrame)
+the example above turns JSON files in your `PATH_OF_JSON` into table-like DataFrame.
+and you will be able to start analyzing content in the `df`.
 
-# Introduction of fb-json2table
+# More introduction about fb-json2table
 
 JSON is not friendly to data scientists, we love tables.
 
-The goal of this repoitory is to automate the parsing process of JSON files in downloaded Facebook archive, turn those JSON files (not easy-to-analyze) to tables (easy-to-analyze) so that it can be much simpler for data scientists to analyze.
+The purpose of this repoitory is to automate the parsing process of JSON files in downloaded Facebook archive,
+turn those JSON files (not easy-to-analyze) to tables (easy-to-analyze) so that it can be easier for data scientists to analyze. 
+This repository is not only for data scientists, the ultimate goal is to reduce the entry barrier for anyone who wants to analyze their own data.
 
-Actually, it can be used to turn *any data with FB-LIKE JSON structure* to table as long as the data structure if similar.
-We hope to reduce the entry barrier for anyone who wants to analyze their own data.
+Actually, it can also be used to **turn any data with FB-LIKE JSON structure to table** as long as the data structure if similar.
 
 
-Here is an example of *FB-LIKE JSON structure*
+Here is an example of **FB-LIKE JSON structure**
 
 ```
 [
@@ -119,7 +123,7 @@ Here is an example of *FB-LIKE JSON structure*
 ]
 ```
 
-or you can refer to how this repo turn dict and list combination to table: [link](https://github.com/numbersprotocol/fb-json2table/blob/master/dict_list_combination_to_table.txt)
+[This simple document](https://github.com/numbersprotocol/fb-json2table/blob/master/dict_list_combination_to_table.txt) shows the logic behind the JSON to Table conversions. If you are not sure whether or not your data is *FB-LIKE*, it might give your some hint.
 
 ## why Facebook json is not friendly to analyze?
 
