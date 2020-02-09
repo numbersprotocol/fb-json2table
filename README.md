@@ -19,7 +19,7 @@
    In order to analyze your Facebook data, you first need to get a copy of your data from Facebook. Please follow the [instruction](https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) provided by Facebook and download. [This post](https://www.wired.com/story/download-facebook-data-how-to-read/) also provides good instructions on how to download your own Facebook data and how it looks.
 
 
-   The downloaded data is a big zip archive with the size from a hundred MB to a few GB. Be patient and unzip the archive. The **path of the root folder** which contains all JSON files will be the `PATH_OF_JSON` you need to execute the example below. 
+   The downloaded data is a big zip archive with the size from a hundred MB to a few GB. Be patient and unzip the archive. Pick one **JSON file in the archive** as the `PATH_OF_JSON` and execute the sample code below. For example, you can use `$PATH_OF_ARCHIVE/ads/ads_interests.json` as `PATH_OF_JSON` to test the following Hello World sample.
 
 
 The tree structure of the folder should look like
@@ -106,6 +106,8 @@ for df in temp_dfs.df_list:
 
 the example above turns JSON files in your `PATH_OF_JSON` into table-like DataFrame.
 and you will be able to start analyzing content in the `df`.
+
+Please note! If your data contains special characters or non-English words, you will need to handle the encoding properly before you can analyze it.
 
 # More introduction about fb-json2table
 
