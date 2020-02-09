@@ -83,10 +83,10 @@ $ sudo pip3 install fbjson2table
     $ pip3 install virtualenv
     $ virtualenv -p python3 env
     $ source env/bin/activate
-    $ (env) pip3 install pandas==0.24.1
     $ (env) python3 setup.py bdist_wheel
     $ (env) pip3 install dist/fbjson2table-1.0.0-py3-none-any.whl
-    $ # if you want to run example/examply.py
+    
+    # if you want to run example/examply.py
     $ (env) pip3 install tabulate
     ```
 
