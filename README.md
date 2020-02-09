@@ -14,7 +14,7 @@
 
    pandas >= 0.24.1
 
-## Before your start
+## Before you start
 
    In order to analyze your Facebook data, you first need to get a copy of your data from Facebook. Please follow the [instruction](https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) provided by Facebook and download. [This post](https://www.wired.com/story/download-facebook-data-how-to-read/) also provides good instructions on how to download your own Facebook data and how it looks.
 
