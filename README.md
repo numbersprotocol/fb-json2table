@@ -70,7 +70,7 @@ $ sudo pip3 install fbjson2table
     $ git clone https://github.com/numbersprotocol/fb-json2table.git
     ```
 
-1. Export PYTHPNPATH
+1. Export PYTHONPATH
 
     ```
     $ export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH
