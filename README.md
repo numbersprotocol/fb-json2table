@@ -1,20 +1,59 @@
-# fb-json2table
-   Parse Facebook archive JSON files to tables.
+# Abstract of fb-json2table
 
-# requirement
+   This repository helps you parse JSON files in the Facebook archive to tables so that it is easier to analyze your own Facebook data. In this README, we will first introduce the steps to setup environment and to use the tool. You may find more information about the reason why you may (or may not) need this tool.
+
+
+   The project was initiated during the collaboration of Spring App with [Bitmark Inc.](https://github.com/bitmark-inc). 
+   If you are not a developer, have no idea how to use this tool but still hope to see your own Facebook data, you can download the Spring App from:
+   * Android Play Store [download](https://play.google.com/store/apps/details?id=com.bitmark.spring)
+   * iOS App Store [download](https://install.appcenter.ms/orgs/support-zzd0-28/apps/spring-inhouse/distribution_groups/users)
+
+# Setup and start using it
+
+## Requirement
 
    pandas >= 0.24.1
 
-# Setup
-   1. clone this repo
+## Before your start
+
+   In order to analyze your Facebook data, you first need to get a copy of your data from Facebook. Please follow the [instruction](https://www.facebook.com/help/1701730696756992?helpref=hc_global_nav) provided by Facebook and download. [This post](https://www.wired.com/story/download-facebook-data-how-to-read/) also provide good instructions of how to download your own Facebook data and how it will look like.
+
+
+   The downloaded data is a big zip archive with the size from a hundred MB to a fea GB. Be patient and unzip the archive. The `path of the root folder` which contains all JSON files is the `PATH_OF_JSON` you need to execute the example below. The tree structure of the folder should look like
+
+
+```
+.
+├ about_you
+│   ├ face_recognition.json
+│   ├ friend_peer_group.json
+│   └ your_address_books.json
+├ ads
+│   ├ ads_interests.json
+│   └ advertisers_who_uploaded_a_contact_list_with_your_information.json
+├ apps_and_websites
+│   ├ apps_and_websites.json
+│   └ posts_from_apps_and_websites.json
+├ calls_and_messages
+│   └ no-data.txt
+├ comments
+│   └ comments.json
+
+...
+
+```
+
+## Setup environment
+
+   1. Clone this repository
 
       `git clone https://github.com/numbersprotocol/fb-json2table.git`
 
-   2. export path
+   2. Export PYTHPNPATH
 
       `export PYTHONPATH=$PWD/fb-json2table/:$PYTHONPATH`
 
-   or you want to use `virtualenv` to keep environment clean
+   or you may use `virtualenv` to keep the dev environment clean
    
    1. `git clone https://github.com/numbersprotocol/fb-json2table.git`
    
@@ -35,8 +74,7 @@
    8. `(env) pip3 install tabulate`
    
    
-
-# TL;DR
+## TL;DR (The Hello World example)
 
 ```
 from fbjson2table.func_lib import parse_fb_json
@@ -50,18 +88,20 @@ for df in temp_dfs.df_list:
     print(df)
 ```
 
+the example above turns JSON files in your `PATH_OF_JSON`
 and you will find that all the content in json turned to table-like(DataFrame)
 
-# Introduction
-This repo is based on the requierments of [Numbers](https://github.com/numbersprotocol).
+# Introduction of fb-json2table
 
-The final goal of this repo is to automate the parsing process of json in downloaded Facebook data.
+JSON is not friendly to data scientists, we love tables.
 
-Thus, if you also want to analyze your own facebook data or you have some json that structure is like facebook data,
+The goal of this repoitory is to automate the parsing process of JSON files in downloaded Facebook archive, turn those JSON files (not easy-to-analyze) to tables (easy-to-analyze) so that it can be much simpler for data scientists to analyze.
 
-this repo can help you to turn the difficult to analyze json to easier to analyze table.
+Actually, it can be used to turn *any data with FB-LIKE JSON structure* to table as long as the data structure if similar.
+We hope to reduce the entry barrier for anyone who wants to analyze their own data.
 
-Note: what I mean of structure is like Facebook json:
+
+Here is an example of *FB-LIKE JSON structure*
 
 ```
 [
