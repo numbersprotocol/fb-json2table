@@ -43,7 +43,7 @@ The tree structure of the folder should look like
 
 ## TL;DR (The first example)
 
-After following the [installation guide](https://github.com/numbersprotocol/fb-json2table/wiki/Installation) in the wiki page, you may try to run the following the start the first analysis of your own Facebook data.
+After following the [installation guide](https://github.com/numbersprotocol/fb-json2table/wiki/Installation) in the wiki page to setup the environment, you may run the following code to start the first analysis of your own Facebook data.
 
 ```
 from fbjson2table.func_lib import parse_fb_json
@@ -62,7 +62,7 @@ and you will be able to start analyzing content in the `df`.
 
 Please note! If your data contains special characters or non-English words, you will need to handle the encoding properly before you can analyze it.
 
-For more examples, please go to [Hello World and More](https://github.com/numbersprotocol/fb-json2table/wiki/Hello-World-and-More) wiki page).
+For more examples, please go to [Hello World and More](https://github.com/numbersprotocol/fb-json2table/wiki/Hello-World-and-More) wiki page.
 
 # More information about fb-json2table
 
@@ -75,7 +75,7 @@ This repository is not only for data scientists, the ultimate goal is to reduce 
 Actually, it can also be used to **turn any data with FB-LIKE JSON structure to table** as long as the data structure if similar.
 
 
-Here is an example of **FB-LIKE JSON structure**
+Here is an example of FB-LIKE JSON structure
 
 ```
 [
@@ -96,11 +96,11 @@ Here is an example of **FB-LIKE JSON structure**
 [This simple document](https://github.com/numbersprotocol/fb-json2table/blob/master/dict_list_combination_to_table.txt) shows the logic behind the JSON to Table conversions. If you are not sure whether or not your data is *FB-LIKE*, it might give you some hint.
 
 
-You may find our more in the wiki pages:
+You may find out more in the wiki pages:
 
 * [Why Facebook data is difficult to analyze with design concepts of this repo](https://github.com/numbersprotocol/fb-json2table/wiki/Design-Concepts)
-* [How we deal with changing format in the Facebook data?](https://github.com/numbersprotocol/fb-json2table/wiki/Deal-with-changing-format)
-* [A closer look of the flattened JSON](https://github.com/numbersprotocol/fb-json2table/wiki/Flattened-JSON)
+* [How to deal with changing format in the Facebook data?](https://github.com/numbersprotocol/fb-json2table/wiki/Deal-with-changing-format)
+* [A closer look of the flattened JSON structure](https://github.com/numbersprotocol/fb-json2table/wiki/Flattened-JSON)
 * [Explanation of terms used in this repo](https://github.com/numbersprotocol/fb-json2table/wiki/Explaining-Terms)
 
 # Special thanks
